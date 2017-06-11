@@ -1,3 +1,30 @@
+./build.sh
+
+# docker login
+# docker push docker push ernestgwilsonii/mongodb:latest
+# List images:
+#   docker images -a
+# Remove all images:
+#   docker rmi $(docker images -a -q)
+# List dangling images:
+#   docker images -f dangling=true
+# Remove dangling images:
+#   docker rmi $(docker images -f dangling=true -q)
+# REF: https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes
+
+# Run MongoDB on a stand-alone Docker
+docker run --name mongodba -p 27017:27017 ernestgwilsonii/mongodb mongod -f /etc/mongod.conf run
+docker run -d --name mongodba -p 27017:27017 ernestgwilsonii/mongodb mongod -f /etc/mongod.conf run
+
+# Run MongoDB cluster on a stand-alone Docker
+docker-compose up
+docker-compose up -d
+
+# Run MongoDB cluster on a Docker Swarm
+docker stack deploy --compose-file=docker-compose.yml mongo_clust1
+docker stack rm mongo_clust1
+
+
 # How to generate a starting mongo replication key file
 # Each cluster member needs to have a copy of the key to securely replicate data
 # REF: https://docs.mongodb.com/manual/tutorial/deploy-replica-set-with-keyfile-access-control/

@@ -4,13 +4,7 @@ services:
 
   mongo_n1:
     image: ernestgwilsonii/mongodb
-    cap_add:
-    - SYS_ADMIN
-    environment:
-    - container=docker
-    privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - mongodata1:/data/db
       - mongoconfig1:/data/configdb
     deploy:
@@ -22,13 +16,7 @@ services:
 
   mongo_n2:
     image: ernestgwilsonii/mongodb
-    cap_add:
-    - SYS_ADMIN
-    environment:
-    - container=docker
-    privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - mongodata2:/data/db
       - mongoconfig2:/data/configdb
     deploy:
@@ -40,13 +28,7 @@ services:
 
   mongo_n3:
     image: ernestgwilsonii/mongodb
-    cap_add:
-    - SYS_ADMIN
-    environment:
-    - container=docker
-    privileged: true
     volumes:
-      - /sys/fs/cgroup:/sys/fs/cgroup:ro
       - mongodata3:/data/db
       - mongoconfig3:/data/configdb
     deploy:
