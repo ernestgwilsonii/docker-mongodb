@@ -1,0 +1,72 @@
+version: '3.2'
+
+services:
+
+  mongo_n1:
+    image: ernestgwilsonii/mongodb
+    cap_add:
+    - SYS_ADMIN
+    environment:
+    - container=docker
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - mongodata1:/data/db
+      - mongoconfig1:/data/configdb
+    deploy:
+      labels:
+        local.description: "This is MongoDB Node 1 part of Cluster 1"
+      placement:
+        constraints:
+          - node.labels.mongo.rep == 1
+
+  mongo_n2:
+    image: ernestgwilsonii/mongodb
+    cap_add:
+    - SYS_ADMIN
+    environment:
+    - container=docker
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - mongodata2:/data/db
+      - mongoconfig2:/data/configdb
+    deploy:
+      labels:
+        local.description: "This is MongoDB Node 2 part of Cluster 1"
+      placement:
+        constraints:
+          - node.labels.mongo.rep == 2
+
+  mongo_n3:
+    image: ernestgwilsonii/mongodb
+    cap_add:
+    - SYS_ADMIN
+    environment:
+    - container=docker
+    privileged: true
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+      - mongodata3:/data/db
+      - mongoconfig3:/data/configdb
+    deploy:
+      labels:
+        local.description: "This is MongoDB Node 3 part of Cluster 1"
+      placement:
+        constraints:
+          - node.labels.mongo.rep == 3
+
+volumes:
+  mongodata1:
+    driver: local
+  mongoconfig1:
+    driver: local
+  mongodata2:
+    driver: local
+  mongoconfig2:
+    driver: local
+  mongodata3:
+    driver: local
+  mongoconfig3:
+    driver: local
+
